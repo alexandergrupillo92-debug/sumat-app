@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Historial de Declaraciones</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; }
+  table { width:100%; border-collapse: collapse; }
+  th, td { border:1px solid #ccc; padding:8px; text-align:right; font-size:14px; }
+  th { background:#2c3e50; color:#fff; }
+  td:nth-child(1), td:nth-child(2) { text-align:left; }
+  a { color:#2c3e50; }
+</style>
+</head>
+<body>
+<p><a href="{{ url_for('index') }}">&larr; Volver</a></p>
+<h1>Historial de Declaraciones</h1>
+<table>
+  <tr>
+    <th>RIF</th><th>Período</th><th>Declarados</th><th>Reales</th>
+    <th>Diferencia</th><th>Impuesto Omitido</th><th>Recargo</th><th>Reparo Fiscal</th>
+  </tr>
+  {% for d in declaraciones %}
+  <tr>
+    <td>{{ d.contribuyente.rif }}</td>
+    <td>{{ d.periodo }}</td>
+    <td>{{ "%.2f"|format(d.ingresos_declarados) }}</td>
+    <td>{{ "%.2f"|format(d.ingresos_reales) }}</td>
+    <td>{{ "%.2f"|format(d.diferencia) }}</td>
+    <td>{{ "%.2f"|format(d.impuesto_omitido) }}</td>
+    <td>{{ "%.2f"|format(d.recargo) }}</td>
+    <td>{{ "%.2f"|format(d.reparo_fiscal) }}</td>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>
